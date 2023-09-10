@@ -1,3 +1,4 @@
+// Statistics of new registered cars (new ones and second handed ones) in Slovenia
 package main
 
 import (
@@ -10,6 +11,7 @@ import (
 	"io/ioutil"
 )
 
+// Output value
 type car struct {
 	Name string
 	Count uint64
@@ -18,6 +20,7 @@ type car struct {
 	Percentage uint64
 }
 
+// Counters
 type counter struct {
 	Count uint64
 	NewCount uint64
@@ -25,14 +28,21 @@ type counter struct {
 	Percentage uint64
 }
 
+// Funs starts here
 func main() {
+	// Parse flags and args
 	percPtr := flag.Bool("p", false, "Ordered by percentage")
+	allPtr := flag.Bool("a", false, "Ordered by all registrations")
+	brandPtr := flag.Bool("b", false, "Grouped by brand")
+
 	flag.Parse()
 	args := flag.Args()
 
+	// Mode and search prefix word
 	all := true
 	searchFor := ""
 
+	// Sum counters
 	sum := 0
 	newSum := 0
 	oldSum := 0
@@ -54,6 +64,7 @@ func main() {
 		os.Exit(1)
     }
 
+	// Read each CSV file in stats subdirectory
     for _, file := range files {
 		if file.IsDir() {
 			continue
@@ -73,6 +84,7 @@ func main() {
 		firstLine := true
 	
 		for {
+			// Read and parse line
 			record, err := csvReader.Read()
 	
 			if err != nil {
@@ -94,10 +106,15 @@ func main() {
 				brand = "SKODA"
 			}
 	
-			name := brand + " " + model
+			name := brand
+
+			if !*brandPtr {
+				name += " " + model
+			}
 	
 			newCar := dateFirstReg == dateFirstRegInSlo
 	
+			// Accept cars only
 			if category != "OSEBNI AVTOMOBIL" {
 				continue
 			}
@@ -123,7 +140,7 @@ func main() {
 			if newCar {
 				value.NewCount = value.NewCount + 1
 				newSum += 1
-				} else {
+			} else {
 				value.OldCount = value.OldCount + 1
 				oldSum += 1
 			}
@@ -132,15 +149,20 @@ func main() {
 		}
     }
 
-
+	// Make output list from map
 	for key, value := range modelMap {
 		el := car{key, value.Count, value.NewCount, value.OldCount, value.Percentage}
 		modelList = append(modelList, el)
     }
 
-	if (*percPtr) {
+	// Sort
+	if *percPtr {
 		sort.Slice(modelList, func(i, j int) bool {
 			return modelList[i].Percentage > modelList[j].Percentage
+		})
+	} else if *allPtr {
+		sort.Slice(modelList, func(i, j int) bool {
+			return modelList[i].Count > modelList[j].Count
 		})
 	} else {
 		sort.Slice(modelList, func(i, j int) bool {
@@ -148,6 +170,7 @@ func main() {
 		})
 	}
 
+	// Print out
 	fmt.Println("+------+----------------------------------------------------+-------+-------+-------+------+")
 	fmt.Println("| #    | BRAND AND MODEL                                    | NEW   | OLD   | SUM   | PERC |")
 	fmt.Println("+------+----------------------------------------------------+-------+-------+-------+------+")
@@ -159,6 +182,6 @@ func main() {
 	}
 
 	fmt.Println("+------+----------------------------------------------------+-------+-------+-------+------+")
-	fmt.Printf("|      | SUM                                                | %5d | %5d | %5d |      |\n", newSum, oldSum, sum)
+	fmt.Printf("|      | SUM                                                | %5d | %5d | %5d | %3d%% |\n", newSum, oldSum, sum, 100 * newSum / sum)
 	fmt.Println("+------+----------------------------------------------------+-------+-------+-------+------+")
 }
