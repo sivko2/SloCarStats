@@ -25,6 +25,11 @@ Go into *SloCarStats* directory.
 Execute: *go build*
 
 
+# Get Statistics
+
+Download needed CSV files from *https://podatki.gov.si/dataset/prvic-registrirana-vozila-po-mesecih* and put them into the *stats* subdirectory.
+
+
 # Run on Windows
 
 Get help: *SloCarStats.exe -h*
