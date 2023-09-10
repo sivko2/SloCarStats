@@ -181,7 +181,13 @@ func main() {
 		}
 	}
 
+	sumPerc := 0
+
+	if sum != 0 {
+		sumPerc = 100 * newSum / sum		
+	}
+
 	fmt.Println("+------+----------------------------------------------------+-------+-------+-------+------+")
-	fmt.Printf("|      | SUM                                                | %5d | %5d | %5d | %3d%% |\n", newSum, oldSum, sum, 100 * newSum / sum)
+	fmt.Printf("|      | SUM                                                | %5d | %5d | %5d | %3d%% |\n", newSum, oldSum, sum, sumPerc)
 	fmt.Println("+------+----------------------------------------------------+-------+-------+-------+------+")
 }
