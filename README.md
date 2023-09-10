@@ -35,4 +35,6 @@ Get all stats sorted by whole cars' count: *SloCarStats.exe -a*
 
 Get all stats sorted by percentage of new cars: *SloCarStats.exe -p*
 
+Get all stats sorted by new cars' count and grouped by a brand instead of a model: *SloCarStats.exe -b*
+
 Get all stats sorted by new cars' count filtered by name prefix (e.g., BMW): *SloCarStats.exe BMW*
