@@ -61,3 +61,5 @@ Get all stats sorted by new cars' count filtered by name prefix (e.g., BMW): *Sl
 |      | SUM                                                | 34474 | 25884 | 60358 |      |
 +------+----------------------------------------------------+-------+-------+-------+------+
 ```
+
+Note: PERC represents the percentage of new cars.
