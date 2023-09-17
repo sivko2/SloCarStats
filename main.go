@@ -38,6 +38,7 @@ func main() {
 	petrolPtr := flag.Bool("petrol", false, "Filtered by petrol engine")
 	dieselPtr := flag.Bool("diesel", false, "Filtered by diesel engine")
 	electricPtr := flag.Bool("electric", false, "Filtered by non-fuel engine")
+	countPtr := flag.Int64("count", 99999, "Show first N values")
 
 	flag.Parse()
 	args := flag.Args()
@@ -197,6 +198,10 @@ func main() {
 	fmt.Println("+------+----------------------------------------------------+--------+--------+--------+------+")
 
 	for i, value := range modelList {
+		if i >= int(*countPtr) {
+			break
+		}
+
 		if value.Count > 0 {
 			fmt.Printf("| %4d | %-50s | %6d | %6d | %6d | %3d%% |\n", i+1, value.Name, value.NewCount, value.OldCount, value.Count, value.Percentage)
 		}
