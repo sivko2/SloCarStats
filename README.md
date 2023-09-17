@@ -27,22 +27,39 @@ Execute: *go build*
 
 # Get Statistics
 
-Download needed CSV files from *https://podatki.gov.si/dataset/prvic-registrirana-vozila-po-mesecih* and put them into the *stats* subdirectory.
+CSV statistics files from January 2020 to August 2023 are already included. Download newer CSV files from *https://podatki.gov.si/dataset/prvic-registrirana-vozila-po-mesecih* and put them into the *stats* subdirectory if needed.
 
 
 # Run on Windows
 
-Get help: *SloCarStats.exe -h*
+Syntax: *SloCarStats.exe <options> <prefix model filter>*
 
-Get all stats sorted by new cars' count: *SloCarStats.exe*
+Example: *SloCarStats.exe -all "Skoda Kodi"*
 
-Get all stats sorted by whole cars' count: *SloCarStats.exe -a*
+Options:
 
-Get all stats sorted by percentage of new cars: *SloCarStats.exe -p*
+a. Get help: *SloCarStats.exe -h*
 
-Get all stats sorted by new cars' count and grouped by a brand instead of a model: *SloCarStats.exe -b*
+b. Get all stats sorted by new cars' count: *SloCarStats.exe*
 
-Get all stats sorted by new cars' count filtered by name prefix (e.g., BMW): *SloCarStats.exe BMW*
+c. Get all stats sorted by whole car registrations (default: sorted by new car registrations): *SloCarStats.exe -all*
+
+d. Get all stats sorted by percentage of new cars (useless if percentage is being used, default: sorted by new car registrations): *SloCarStats.exe -percentage*
+
+e. Get all stats sorted by new car registrations and grouped by a brand instead of a model: *SloCarStats.exe -group*
+
+f. Filter by year: *SloCarStats.exe -filter 2023*
+
+g. Filter by month and year: *SloCarStats.exe -filter 082023*
+
+h. Filter by petrol engines (other engine flags MUST NOT be used): *SloCarStats.exe -petrol*
+
+i. Filter by diesel engines (other engine flags MUST NOT be used): *SloCarStats.exe -petrol*
+
+j. Filter by non-fuel (mostly electric) engines (other engine flags MUST NOT be used): *SloCarStats.exe -electric*
+
+k. Get all stats sorted by new car registrations, filtered by name prefix (e.g., BMW): *SloCarStats.exe BMW*
+
 
 # Example of Output
 
