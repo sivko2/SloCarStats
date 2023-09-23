@@ -107,6 +107,7 @@ func main() {
 
 			dateFirstReg := record[0]
 			dateFirstRegInSlo := record[1]
+			status := strings.Trim(record[4], " ")
 			brand := strings.Trim(strings.ToUpper(record[20]), " ")
 			category := strings.Trim(strings.ToUpper(record[33]), " ")
 			model := strings.Trim(strings.ToUpper(record[100]), " ")
@@ -124,6 +125,11 @@ func main() {
 
 			newCar := dateFirstReg == dateFirstRegInSlo
 
+			// Accept registrations only (excluding unregistrations)
+			if status != "1" {
+				continue
+			}
+			
 			// Accept cars only
 			if category != "OSEBNI AVTOMOBIL" {
 				continue
