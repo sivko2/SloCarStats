@@ -38,6 +38,8 @@ func main() {
 	petrolPtr := flag.Bool("petrol", false, "Filtered by petrol engine")
 	dieselPtr := flag.Bool("diesel", false, "Filtered by diesel engine")
 	electricPtr := flag.Bool("electric", false, "Filtered by non-fuel engine")
+	personalPtr := flag.Bool("personal", false, "Filtered by personal owners")
+	businessPtr := flag.Bool("business", false, "Filtered by business owners (personal flag disables that flag)")
 	countPtr := flag.Int64("count", 99999, "Show first N values")
 
 	flag.Parse()
@@ -112,6 +114,7 @@ func main() {
 			category := strings.Trim(strings.ToUpper(record[33]), " ")
 			model := strings.Trim(strings.ToUpper(record[100]), " ")
 			engine := strings.Trim(strings.ToUpper(record[48]), " ")
+			ownership := strings.Trim(strings.ToUpper(record[10]), " ")
 
 			if strings.Contains(brand, "KODA") {
 				brand = "SKODA"
@@ -144,6 +147,14 @@ func main() {
 			}
 
 			if *electricPtr && engine != "NI GORIVA" {
+				continue
+			}
+
+			if *personalPtr && ownership != "F" {
+				continue
+			}
+
+			if !*personalPtr && *businessPtr && ownership != "P" {
 				continue
 			}
 
@@ -203,14 +214,21 @@ func main() {
 	fmt.Println("| #    | BRAND AND MODEL                                    | NEW    | OLD    | SUM    | PERC |")
 	fmt.Println("+------+----------------------------------------------------+--------+--------+--------+------+")
 
+	hasMore := false
+
 	for i, value := range modelList {
 		if i >= int(*countPtr) {
+			hasMore = true
 			break
 		}
 
 		if value.Count > 0 {
 			fmt.Printf("| %4d | %-50s | %6d | %6d | %6d | %3d%% |\n", i+1, value.Name, value.NewCount, value.OldCount, value.Count, value.Percentage)
 		}
+	}
+
+	if hasMore {
+		fmt.Println("|  ... | ...                                                |    ... |    ... |    ... |  ... |")
 	}
 
 	sumPerc := 0
