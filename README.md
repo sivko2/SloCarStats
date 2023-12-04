@@ -46,11 +46,11 @@ c. Get all stats sorted by whole car registrations (new + second-hand together, 
 
 d. Get all stats sorted by percentage of new car registrations (default: sorted by new car registrations): *SloCarStats.exe -percentage*
 
-e. Get all stats sorted by new car registrations and grouped by brands: *SloCarStats.exe -group*
+e. Get all stats sorted by new car registrations and grouped by brands: *SloCarStats.exe -brand*
 
-f. Filter by year (e.g., 2023): *SloCarStats.exe -filter 2023*
+f. Filter by year (e.g., 2023): *SloCarStats.exe -period 2023*
 
-g. Filter by month and year (e.g., Aug 2023): *SloCarStats.exe -filter 082023*
+g. Filter by month and year (e.g., Aug 2023): *SloCarStats.exe -period 082023*
 
 h. Filter by petrol engines (other engine flags MUST NOT be used): *SloCarStats.exe -petrol*
 
@@ -60,7 +60,7 @@ j. Filter by non-fuel (electric mostly) engines (other engine flags MUST NOT be 
 
 k. Get all stats sorted by new car registrations, filtered by name prefix - case insensitive (e.g., BMW X): *SloCarStats.exe BMW X*
 
-l. Get first N (e.g., 10) models/brands registrations: *SloCarStats.exe -count 10*
+l. Get first N (e.g., 10) models/brands registrations: *SloCarStats.exe -top 10*
 
 Full syntax description: *SloCarStats.exe [-all | -percentage] [-group] [-filter <MMYYYY> | -filter <YYYY>] [-petrol | -diesel | -electric] [-count <N>]*
 
