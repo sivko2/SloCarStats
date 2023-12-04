@@ -33,14 +33,14 @@ func main() {
 	// Parse flags and args
 	percPtr := flag.Bool("percentage", false, "Ordered by percentage of new car registrations (default: by new car registrations)")
 	allPtr := flag.Bool("all", false, "Ordered by all car registrations (default: by new car registrations)")
-	brandPtr := flag.Bool("group", false, "Grouped by manufacturer")
-	filterPtr := flag.String("filter", "", "Filtered by year (e.g., 2023) or month + year (e.g., 082023 for Aug 2023)")
+	brandPtr := flag.Bool("brand", false, "Grouped by brand")
+	filterPtr := flag.String("period", "", "Filtered by year (e.g., 2023) or month + year (e.g., 082023 for August 2023)")
 	petrolPtr := flag.Bool("petrol", false, "Filtered by petrol engine")
 	dieselPtr := flag.Bool("diesel", false, "Filtered by diesel engine")
 	electricPtr := flag.Bool("electric", false, "Filtered by non-fuel engine")
 	personalPtr := flag.Bool("personal", false, "Filtered by personal owners")
 	businessPtr := flag.Bool("business", false, "Filtered by business owners (personal flag disables that flag)")
-	countPtr := flag.Int64("count", 99999, "Show first N values")
+	countPtr := flag.Int64("top", 99999, "Show first N values")
 
 	flag.Parse()
 	args := flag.Args()
