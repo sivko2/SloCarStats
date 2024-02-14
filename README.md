@@ -1,4 +1,4 @@
-# SloCarStats - Slovenian Car Statistics 2020-2024
+# SloCarStats - Slovenian Car Statistics 2020-2023
 
 This is a command-line application that shows statistics of new and second hand registered cars in Slovenia. It is written in Golang.
 
